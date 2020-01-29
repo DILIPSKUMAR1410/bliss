@@ -1,0 +1,32 @@
+.nav {
+  display: flex;
+  height: 10vh;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav__logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo__text {
+  display: inline-block;
+}
+
+.nav__login {
+  color: var(--clr-primary);
+  border: 1px solid var(--clr-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  transition: all 150ms cubic-bezier(0.5, 0, 0.5, 1);
+  cursor: pointer;
+}
+
+.nav__login:hover {
+  background-color: var(--clr-primary);
+  color: white;
+}
