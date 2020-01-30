@@ -2,7 +2,7 @@
   display: flex;
   height: 10vh;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .nav__logo {
@@ -10,6 +10,9 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.logo__img {
+  height: 10vh;
 }
 
 .logo__text {
@@ -29,4 +32,21 @@
 .nav__login:hover {
   background-color: var(--clr-primary);
   color: white;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 30vw;
+  list-style-type: none;
+}
+
+.nav__item a {
+  color: var(--clr-primary);
+}
+
+.nav__item a:hover {
+  text-decoration: underline;
 }

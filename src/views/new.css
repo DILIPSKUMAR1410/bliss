@@ -3,9 +3,43 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+}
+
+.options__title {
+  color: var(--clr-primary);
+}
+
+.options__title:hover {
+  text-decoration: underline;
 }
 
 .wrapper {
+  margin-left: 1rem;
   width: 80vw;
   height: 80vh;
+  border: 1px solid var(--clr-primary);
+  padding: 1rem;
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.toolbar {
+  background-color: transparent;
+  border: 1px solid var(--clr-primary);
+  border-radius: 0.5rem;
+}
+
+.new__editor {
+  position: relative;
+}
+
+.new__submit {
+  all: unset;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  color: green;
+  cursor: pointer;
+  z-index: 1;
 }
