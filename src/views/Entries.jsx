@@ -30,7 +30,7 @@ class Entries extends Component {
 
   getEntries = () => {
     const { entries } = this.state;
-    if (entries.length === 0)
+    if (!entries)
       return (
         <span>You have no entries so far. Go ahead and create one now.</span>
       );
