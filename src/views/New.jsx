@@ -6,8 +6,14 @@ import { Editor } from "react-draft-wysiwyg";
 import draftToHtml from "draftjs-to-html";
 import shortid from "shortid";
 
+import { UserSession, AppConfig } from "blockstack";
+
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import "./new.css";
+
+const appConfig = new AppConfig();
+const userSession = new UserSession({ appConfig });
+const options = { encrypt: false };
 
 class New extends Component {
   state = {
@@ -49,12 +55,17 @@ class New extends Component {
 
     let entries = JSON.parse(localStorage.getItem("bliss.entries")) || [];
     entries.push(newEntry);
-    localStorage.setItem("bliss.entries", JSON.stringify(entries));
-    console.log("done");
+    userSession
+      .putFile("bliss.entries.json", JSON.stringify(entries), options)
+      .then(() => {
+        localStorage.setItem("bliss.entries", JSON.stringify(entries));
+        this.props.history.push("/entries");
+      });
   };
 
   render() {
     const { editorState } = this.state;
+    if (!userSession.isUserSignedIn()) this.props.history.push("/");
     return (
       <React.Fragment>
         <Navbar />

@@ -3,6 +3,8 @@
   height: 10vh;
   align-items: center;
   justify-content: space-between;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .nav__logo {
@@ -17,9 +19,14 @@
 
 .logo__text {
   display: inline-block;
+  font-size: 1.1rem;
+  color: var(--clr-primary);
+  margin-left: 0.5rem;
 }
 
 .nav__login {
+  all: unset;
+  padding: 0.5rem 1rem;
   color: var(--clr-primary);
   border: 1px solid var(--clr-primary);
   padding: 0.5rem 1rem;
@@ -48,5 +55,17 @@
 }
 
 .nav__item a:hover {
+  text-decoration: underline;
+}
+
+.nav__link {
+  all: unset;
+  color: var(--clr-primary);
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.nav__link:hover {
+  color: red;
   text-decoration: underline;
 }

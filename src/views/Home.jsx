@@ -3,10 +3,23 @@ import Navbar from "../components/Navbar";
 
 import hedgehog from "../public/images/hedghog.gif";
 import walking from "../public/images/loading.gif";
+import { UserSession, AppConfig } from "blockstack";
 
 import "./home.css";
 
+const appConfig = new AppConfig();
+const userSession = new UserSession(appConfig);
+
 class Home extends Component {
+  componentDidMount() {
+    if (userSession.isSignInPending()) {
+      userSession.handlePendingSignIn().then(userData => {
+        this.props.history.push("/entries");
+        this.setState({ userData: userData });
+      });
+    }
+  }
+
   render() {
     return (
       <React.Fragment>

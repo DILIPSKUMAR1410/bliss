@@ -2,12 +2,34 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
+import { UserSession, AppConfig } from "blockstack";
+
 import "./entries.css";
 
+const appConfig = new AppConfig();
+const userSession = new UserSession({ appConfig });
+const options = { decrypt: false };
+
 class Entries extends Component {
+  state = {
+    entries: JSON.parse(localStorage.getItem("bliss.entries")) || []
+  };
+
+  componentDidMount() {
+    userSession
+      .getFile("bliss.entries.json", options)
+      .then(data => {
+        const entries = JSON.parse(data);
+        localStorage.setItem("bliss.entries", data);
+        this.setState({ entries });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
   getEntries = () => {
-    const entries = JSON.parse(localStorage.getItem("bliss.entries")) || [];
-    console.log("e", typeof entries);
+    const { entries } = this.state;
     if (entries.length === 0)
       return (
         <span>You have no entries so far. Go ahead and create one now.</span>
@@ -15,7 +37,7 @@ class Entries extends Component {
     else
       return entries.map(entry => {
         return (
-          <Link to={`/post/${entry.id}`}>
+          <Link key={entry.id} to={`/post/${entry.id}`}>
             <div className="entry">
               <div
                 className="entry__content"
@@ -30,6 +52,7 @@ class Entries extends Component {
   };
 
   render() {
+    if (!userSession.isUserSignedIn()) this.props.history.push("/");
     return (
       <React.Fragment>
         <Navbar />

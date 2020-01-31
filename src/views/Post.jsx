@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { UserSession, AppConfig } from "blockstack";
 
 import "./post.css";
+
+const appConfig = new AppConfig();
+const userSession = new UserSession({ appConfig });
 
 class Post extends Component {
   getPost = () => {
@@ -25,6 +29,7 @@ class Post extends Component {
   };
 
   render() {
+    if (!userSession.isUserSignedIn()) this.props.history.push("/");
     return (
       <React.Fragment>
         <Navbar />
