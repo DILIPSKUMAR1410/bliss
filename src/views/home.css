@@ -12,15 +12,3 @@
   font-size: 1.3rem;
   margin: 1rem auto;
 }
-
-.loading {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.loading__img {
-  height: 200px;
-}

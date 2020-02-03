@@ -2,17 +2,27 @@ import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 
 import hedgehog from "../public/images/hedghog.gif";
-import walking from "../public/images/loading.gif";
 import { UserSession, AppConfig } from "blockstack";
 
 import "./home.css";
+import Loader from "../components/Loader";
 
 const appConfig = new AppConfig();
 const userSession = new UserSession(appConfig);
 
 class Home extends Component {
+  state = {
+    showLoader: false
+  };
+
+  showLoader = () => {
+    console.log("show");
+    this.setState({ showLoader: true });
+  };
+
   componentDidMount() {
     if (userSession.isSignInPending()) {
+      this.showLoader();
       userSession.handlePendingSignIn().then(userData => {
         this.props.history.push("/entries");
         this.setState({ userData: userData });
@@ -45,20 +55,8 @@ class Home extends Component {
             <img src={hedgehog} alt="" />
           </div>
         </div>
-        <div className="loading">
-          <img src={walking} alt="" className="loading__img" />
-          <p className="loading__desc">
-            Gratitude Journaling enhances positivity
-          </p>
-          <p className="loading__desc">Start by making one entry per day</p>
-          <p className="loading__desc">A habit is difficult to cultivate</p>
-          <p className="loading__desc">
-            Keep your efforts on for few days before expecting any output
-          </p>
-          <p className="loading__desc">
-            Explore <span className="bliss">Bliss</span>
-          </p>
-        </div>
+
+        {this.state.showLoader ? <Loader show /> : null}
       </React.Fragment>
     );
   }

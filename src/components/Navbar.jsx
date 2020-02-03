@@ -64,7 +64,9 @@ class Navbar extends Component {
             <Link to="/new">New Entry</Link>
           </li>
           <li className="nav__item">
-            <button className="nav__link">Logout</button>
+            <button className="nav__link" onClick={this.handleLogout}>
+              Logout
+            </button>
           </li>
         </ul>
       </nav>
