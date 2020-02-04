@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import Navbar from "../components/Navbar";
 
-import hedgehog from "../public/images/hedghog.gif";
 import { UserSession, AppConfig } from "blockstack";
 
 import "./home.css";
 import Loader from "../components/Loader";
+
+import Lottie from 'react-lottie';
+import animationData from '../public/images/hedghog.json'
 
 const appConfig = new AppConfig();
 const userSession = new UserSession(appConfig);
@@ -31,6 +33,14 @@ class Home extends Component {
   }
 
   render() {
+   const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: animationData,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    }
     return (
       <React.Fragment>
         <Navbar notLoggedIn />
@@ -52,7 +62,9 @@ class Home extends Component {
             </p>
           </div>
           <div className="landing__sub landing__sub--2">
-            <img src={hedgehog} alt="" />
+            <Lottie options={defaultOptions}
+              height={500} width={350}
+            />
           </div>
         </div>
 
